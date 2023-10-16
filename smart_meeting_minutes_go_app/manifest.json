@@ -1,0 +1,524 @@
+{
+  "type": "app",
+  "runtime": "go",
+  "id": "",
+  "name": "smart_meeting_minutes_go_app",
+  "version": "1.0.0",
+  "vendor": "Agora",
+  "author": "Agora",
+  "document": "",
+  "description": "Default app written in the Go programming language.",
+  "icon": "",
+  "tags": "Default",
+  "dependencies": [
+    {
+      "type": "system",
+      "name": "rte_runtime",
+      "version": "1.0.0"
+    },
+    {
+      "type": "system",
+      "name": "rtm_sdk",
+      "version": "2.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "rtc",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "rtm",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "rtc_initialize",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "rtc_relay_audience",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "langchain_go",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "stt_xf_nrt",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "rtc_audio_dump",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "smart_meeting_minutes_restful_gateway",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "smart_meeting_minutes_control",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "srt_processor",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "webhook",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension",
+      "name": "oss_aliyun",
+      "version": "1.0.0"
+    },
+    {
+      "type": "extension_group",
+      "name": "default_extension_group",
+      "version": "1.0.0"
+    },
+    {
+      "type": "protocol",
+      "name": "http_libws",
+      "version": "1.0.0"
+    }
+  ],
+  "support": [
+    [
+      "linux",
+      "x64",
+      "debug"
+    ]
+  ],
+  "predefined_graph": [
+    {
+      "name": "0",
+      "auto_start": true,
+      "graph": [
+        {
+          "extension_group": {
+            "addon": "default_extension_group",
+            "name": "gateway_group"
+          },
+          "extension": {
+            "addon": "smart_meeting_minutes_restful_gateway",
+            "name": "gateway"
+          }
+        },
+        {
+          "extension_group": {
+            "addon": "default_extension_group",
+            "name": "gateway_group"
+          },
+          "extension": {
+            "addon": "rtc_initialize",
+            "name": "rtc_initialize"
+          },
+          "property": {
+            "appId": "<AGORA_RTC_APP_ID>"
+          }
+        }
+      ]
+    },
+    {
+      "name": "business",
+      "auto_start": false,
+      "graph": [
+        {
+          "extension_group": {
+            "addon": "default_extension_group",
+            "name": "control_group"
+          },
+          "extension": {
+            "addon": "smart_meeting_minutes_control",
+            "name": "control"
+          },
+          "cmd": [
+            {
+              "command": "start_rtc_puller",
+              "dest": [
+                {
+                  "extension_group": "audience_group",
+                  "extension": "rtc_relay_audience_extension",
+                  "cmd_conversions": [
+                    {
+                      "cmd": {
+                        "type": "per_property",
+                        "keep_original": true,
+                        "rules": [
+                          {
+                            "path": "rte::command",
+                            "type": "fixed_value",
+                            "value": "string(start)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "command": "start_audio_dumper",
+              "dest": [
+                {
+                  "extension_group": "audio_dump_group",
+                  "extension": "rtc_audio_dump",
+                  "cmd_conversions": [
+                    {
+                      "cmd": {
+                        "type": "per_property",
+                        "keep_original": true,
+                        "rules": [
+                          {
+                            "path": "rte::command",
+                            "type": "fixed_value",
+                            "value": "string(start)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "command": "stop_rtc_puller",
+              "dest": [
+                {
+                  "extension_group": "audience_group",
+                  "extension": "rtc_relay_audience_extension",
+                  "cmd_conversions": [
+                    {
+                      "cmd": {
+                        "type": "per_property",
+                        "keep_original": true,
+                        "rules": [
+                          {
+                            "path": "rte::command",
+                            "type": "fixed_value",
+                            "value": "string(stop)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "command": "stop_audio_dumper",
+              "dest": [
+                {
+                  "extension_group": "audio_dump_group",
+                  "extension": "rtc_audio_dump",
+                  "cmd_conversions": [
+                    {
+                      "cmd": {
+                        "type": "per_property",
+                        "keep_original": true,
+                        "rules": [
+                          {
+                            "path": "rte::command",
+                            "type": "fixed_value",
+                            "value": "string(stop)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "command": "stt",
+              "dest": [
+                {
+                  "extension_group": "stt_group",
+                  "extension": "stt_xf_nrt"
+                }
+              ]
+            },
+            {
+              "command": "meeting_minutes",
+              "dest": [
+                {
+                  "extension_group": "langchain_group",
+                  "extension": "langchain"
+                }
+              ]
+            },
+            {
+              "command": "chatgpt_statistics",
+              "dest": [
+                {
+                  "extension_group": "langchain_group",
+                  "extension": "langchain",
+                  "cmd_conversions": [
+                    {
+                      "cmd": {
+                        "type": "per_property",
+                        "keep_original": true,
+                        "rules": [
+                          {
+                            "path": "rte::command",
+                            "type": "fixed_value",
+                            "value": "string(statistics)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "command": "stt_statistics",
+              "dest": [
+                {
+                  "extension_group": "stt_group",
+                  "extension": "stt_xf_nrt",
+                  "cmd_conversions": [
+                    {
+                      "cmd": {
+                        "type": "per_property",
+                        "keep_original": true,
+                        "rules": [
+                          {
+                            "path": "rte::command",
+                            "type": "fixed_value",
+                            "value": "string(statistics)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "command": "merge",
+              "dest": [
+                {
+                  "extension_group": "srt_processor_group",
+                  "extension": "srt_processor"
+                }
+              ]
+            },
+            {
+              "command": "adjust",
+              "dest": [
+                {
+                  "extension_group": "srt_processor_group",
+                  "extension": "srt_processor"
+                }
+              ]
+            },
+            {
+              "command": "notify",
+              "dest": [
+                {
+                  "extension_group": "webhook_group",
+                  "extension": "webhook"
+                }
+              ]
+            },
+            {
+              "command": "upload",
+              "dest": [
+                {
+                  "extension_group": "oss_aliyun_group",
+                  "extension": "oss_aliyun"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "extension_group": {
+            "addon": "default_extension_group",
+            "name": "audience_group"
+          },
+          "extension": {
+            "addon": "rtc_relay_audience_extension",
+            "name": "rtc_relay_audience_extension"
+          },
+          "cmd": [
+            {
+              "command": "start_pulling_frame_stream",
+              "dest": [
+                {
+                  "extension_group": "rtc_group",
+                  "extension": "rtc_extension"
+                }
+              ]
+            },
+            {
+              "command": "stop_pulling",
+              "dest": [
+                {
+                  "extension_group": "rtc_group",
+                  "extension": "rtc_extension"
+                }
+              ]
+            }
+          ],
+          "pcm_frame": [
+            {
+              "dest": [
+                {
+                  "extension_group": "audio_dump_group",
+                  "extension": "rtc_audio_dump"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "extension_group": {
+            "addon": "default_extension_group",
+            "name": "rtc_group"
+          },
+          "extension": {
+            "addon": "rtc_extension",
+            "name": "rtc_extension"
+          },
+          "property": {
+            "self_init": false
+          },
+          "cmd": [
+            {
+              "command": "onUserJoined",
+              "dest": [
+                {
+                  "extension_group": "control_group",
+                  "extension": "control"
+                }
+              ]
+            },
+            {
+              "command": "onUserLeft",
+              "dest": [
+                {
+                  "extension_group": "control_group",
+                  "extension": "control"
+                }
+              ]
+            }
+          ],
+          "pcm_frame": [
+            {
+              "dest": [
+                {
+                  "extension_group": "audience_group",
+                  "extension": "rtc_relay_audience_extension"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "extension_group": {
+            "addon": "default_extension_group",
+            "name": "audio_dump_group"
+          },
+          "extension": {
+            "addon": "rtc_audio_dump",
+            "name": "rtc_audio_dump"
+          },
+          "cmd": [
+            {
+              "command": "file_dump_complete",
+              "dest": [
+                {
+                  "extension_group": "control_group",
+                  "extension": "control"
+                }
+              ]
+            },
+            {
+              "command": "file_dump_all_completed",
+              "dest": [
+                {
+                  "extension_group": "control_group",
+                  "extension": "control"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "extension_group": {
+            "addon": "default_extension_group",
+            "name": "langchain_group"
+          },
+          "extension": {
+            "addon": "langchain_go",
+            "name": "langchain"
+          },
+          "property": {
+            "OPENAI_API_KEY": "<OPENAI_API_KEY>",
+            "AZURE_OPENAI_KEY": "<AZURE_OPENAI_KEY>",
+            "AZURE_DEPLOYMENT_ID": "<AZURE_DEPLOYMENT_ID>",
+            "AZURE_RESOURCE_NAME": "<AZURE_RESOURCE_NAME>",
+            "AZURE_API_VERSION": "<AZURE_API_VERSION>"
+          }
+        },
+        {
+          "extension_group": {
+            "addon": "default_extension_group",
+            "name": "stt_group"
+          },
+          "extension": {
+            "addon": "stt_xf_nrt",
+            "name": "stt_xf_nrt"
+          },
+          "property": {
+            "APP_ID": "<IFLY_APP_ID>",
+            "API_KEY": "<IFLY_API_KEY>",
+            "API_SECRET": "<IFLY_API_SECRET>"
+          }
+        },
+        {
+          "extension_group": {
+            "addon": "default_extension_group",
+            "name": "srt_processor_group"
+          },
+          "extension": {
+            "addon": "srt_processor",
+            "name": "srt_processor"
+          }
+        },
+        {
+          "extension_group": {
+            "addon": "default_extension_group",
+            "name": "webhook_group"
+          },
+          "extension": {
+            "addon": "webhook",
+            "name": "webhook"
+          }
+        },
+        {
+          "extension_group": {
+            "addon": "default_extension_group",
+            "name": "oss_aliyun_group"
+          },
+          "extension": {
+            "addon": "oss_aliyun",
+            "name": "oss_aliyun"
+          }
+        }
+      ]
+    }
+  ]
+}

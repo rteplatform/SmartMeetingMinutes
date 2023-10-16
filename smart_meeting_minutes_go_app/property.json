@@ -1,0 +1,8 @@
+{
+  "uri": {
+    "value": "http://127.0.0.1:8001/"
+  },
+  "log_level": 3,
+  "long_running_mode": true,
+  "PPROF_HEAP_DUMP_INTERVAL": 30
+}

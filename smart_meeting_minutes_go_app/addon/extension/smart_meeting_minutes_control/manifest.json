@@ -1,0 +1,37 @@
+{
+  "type": "extension",
+  "runtime": "cpp",
+  "id": "",
+  "name": "smart_meeting_minutes_control",
+  "version": "1.0.0",
+  "vendor": "Agora",
+  "author": "Agora",
+  "document": "",
+  "description": "This extension is the core control center to respond the status of the whole RTE app, and to start/stop the overall process.",
+  "icon": "",
+  "tags": "Default",
+  "dependencies": [],
+  "apiVersion": [],
+  "apis": {
+    "cmd_in": [
+      "acquire",
+      "start",
+      "query",
+      "stop"
+    ],
+    "cmd_out": [],
+    "data_in": [],
+    "data_out": [],
+    "image_frame_in": [],
+    "image_frame_out": [],
+    "pcm_frame_in": [],
+    "pcm_frame_out": []
+  },
+  "support": [
+    [
+      "linux",
+      "x64",
+      "debug"
+    ]
+  ]
+}

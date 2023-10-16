@@ -1,0 +1,37 @@
+{
+  "type": "extension",
+  "runtime": "cpp",
+  "id": "",
+  "name": "srt_processor",
+  "version": "1.0.0",
+  "vendor": "Agora",
+  "author": "Agora",
+  "document": "",
+  "description": "This extension is used to process srt format text/file.",
+  "icon": "",
+  "tags": "Default",
+  "dependencies": [],
+  "apiVersion": [],
+  "apis": {
+    "cmd_in": [
+      "acquire",
+      "start",
+      "query",
+      "stop"
+    ],
+    "cmd_out": [],
+    "data_in": [],
+    "data_out": [],
+    "image_frame_in": [],
+    "image_frame_out": [],
+    "pcm_frame_in": [],
+    "pcm_frame_out": []
+  },
+  "support": [
+    [
+      "linux",
+      "x64",
+      "debug"
+    ]
+  ]
+}

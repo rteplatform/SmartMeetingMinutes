@@ -1,0 +1,21 @@
+{
+  "type": "system",
+  "runtime": "c",
+  "id": "",
+  "name": "rte_runtime",
+  "version": "1.0.0",
+  "vendor": "Agora",
+  "author": "Agora",
+  "document": "",
+  "description": "System package for the basic RTE runtime.",
+  "icon": "",
+  "tags": "Default",
+  "dependencies": [],
+  "support": [
+    [
+      "linux",
+      "x64",
+      "debug"
+    ]
+  ]
+}

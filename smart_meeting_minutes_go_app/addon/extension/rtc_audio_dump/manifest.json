@@ -1,0 +1,38 @@
+{
+  "type": "extension",
+  "runtime": "cpp",
+  "id": "",
+  "name": "rtc_audio_dump",
+  "version": "1.0.0",
+  "vendor": "Agora",
+  "author": "Agora",
+  "document": "",
+  "description": "An extension used to dump audio frame to files.",
+  "icon": "",
+  "tags": "Default",
+  "dependencies": [
+    {
+      "type": "system",
+      "name": "rte_runtime",
+      "version": "1.0.0"
+    }
+  ],
+  "apiVersion": [],
+  "apis": {
+    "cmd_in": [],
+    "cmd_out": [],
+    "data_in": [],
+    "data_out": [],
+    "image_frame_in": [],
+    "image_frame_out": [],
+    "pcm_frame_in": [],
+    "pcm_frame_out": []
+  },
+  "support": [
+    [
+      "linux",
+      "x64",
+      "debug"
+    ]
+  ]
+}

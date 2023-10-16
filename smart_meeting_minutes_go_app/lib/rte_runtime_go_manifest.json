@@ -1,0 +1,27 @@
+{
+  "type": "system",
+  "runtime": "go",
+  "id": "",
+  "name": "rte_runtime_go",
+  "version": "1.0.0",
+  "vendor": "Agora",
+  "author": "Agora",
+  "document": "",
+  "description": "System package for the Golang RTE runtime.",
+  "icon": "",
+  "tags": "Default",
+  "dependencies": [
+    {
+      "type": "system",
+      "name": "rte_runtime",
+      "version": "1.0.0"
+    }
+  ],
+  "support": [
+    [
+      "linux",
+      "x64",
+      "debug"
+    ]
+  ]
+}

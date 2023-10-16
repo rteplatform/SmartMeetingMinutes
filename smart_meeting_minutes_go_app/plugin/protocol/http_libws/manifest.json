@@ -1,0 +1,26 @@
+{
+  "type": "protocol",
+  "runtime": "c",
+  "name": "http_libws",
+  "version": "1.0.0",
+  "vendor": "Agora",
+  "author": "Agora",
+  "document": "",
+  "description": "http(s)/ws(s) protocol made of libwebsockets.",
+  "icon": "",
+  "protocol": [
+    "http",
+    "https"
+  ],
+  "tag": [
+    "agora"
+  ],
+  "dependencies": [],
+  "support": [
+    [
+      "linux",
+      "x64",
+      "debug"
+    ]
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "extension_group",
+  "runtime": "c",
+  "id": "",
+  "name": "default_extension_group",
+  "version": "1.0.0",
+  "vendor": "Agora",
+  "author": "Agora",
+  "document": "",
+  "description": "This is the default empty extension group to contain various RTE extensions.",
+  "icon": "",
+  "tags": "Default",
+  "dependencies": [
+    {
+      "type": "system",
+      "name": "rte_runtime",
+      "version": "1.0.0"
+    }
+  ],
+  "support": [
+    [
+      "linux",
+      "x64",
+      "debug"
+    ]
+  ]
+}

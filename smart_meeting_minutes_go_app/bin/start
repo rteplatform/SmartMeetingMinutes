@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+cd $(dirname "${BASH_SOURCE[0]}")/..
+
+# these env vars doesn't pass through
+if [[ -f "lib/libclang_rt.asan_osx_dynamic.dylib" ]]
+then
+  export DYLD_INSERT_LIBRARIES=lib/libclang_rt.asan_osx_dynamic.dylib
+fi
+
+if [[ -f "lib/libasan.so" ]]
+then
+  export LD_PRELOAD=lib/libasan.so
+fi
+
+export DYLD_LIBRARY_PATH=lib
+export LD_LIBRARY_PATH=lib
+
+exec bin/main
